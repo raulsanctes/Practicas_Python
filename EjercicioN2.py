@@ -1,3 +1,5 @@
+import re
+
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -9,27 +11,29 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-def valida_pass(password):
 
+def valida_pass(password):
     enlista = list(password)
-    if len(enlista) > 8 :
-        print(bcolors.OKGREEN +"Longitud OK")
+    if len(enlista) > 8:
+        print(bcolors.OKGREEN + "Longitud OK")
         if any(chr.isdigit() for chr in password):
-            print(bcolors.OKGREEN +"Digitos OK")
+            print(bcolors.OKGREEN + "Digitos OK")
             if any(chr.isalpha() for chr in password):
-                print(bcolors.OKGREEN +"Alfanumerico OK")
+                print(bcolors.OKGREEN + "Alfanumerico OK")
                 if any(chr.isalnum() != True for chr in password):
-                    print(bcolors.OKGREEN +"Caracter Especial OK")
-                    if any(chr.isspace() != True for chr in password):
-                        print(bcolors.OKGREEN +"No espacios OK")
+                    print(bcolors.OKGREEN + "Caracter Especial OK")
+                    if any(bool(re.search(r"\s", ele)) for ele in enlista) == False:
+                        print(bcolors.OKGREEN + "Sin espacios OK")
                         if any(chr.islower() for chr in password):
-                            print(bcolors.OKGREEN +"Minuscula OK")
+                            print(bcolors.OKGREEN + "Minuscula OK")
                             if any(chr.isupper() for chr in password):
-                                print(bcolors.OKGREEN +"Mayusculas OK")
-                        print(bcolors.OKCYAN + "CONTRASEÑA VALIDA" + bcolors.ENDC)
-                        return True
+                                print(bcolors.OKGREEN + "Mayusculas OK")
+                                print(bcolors.OKCYAN + "CONTRASEÑA VALIDA" + bcolors.ENDC)
+                                return True
+
     print(bcolors.WARNING + "Contraseña no válida" + bcolors.ENDC)
     return False
+
 
 clave = input(bcolors.HEADER + "Ingrese una contraseña\n" + bcolors.ENDC)
 
