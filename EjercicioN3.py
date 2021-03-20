@@ -34,6 +34,32 @@ def valida_usuario(usuario):
     print(bcolors.WARNING + "Usuario no válido" + bcolors.ENDC)
     return False
 
+
+def valida_pass(password):
+    enlista = list(password)
+    if len(enlista) > 8:
+        print(bcolors.OKGREEN + "Longitud OK")
+        if any(chr.isdigit() for chr in password):
+            print(bcolors.OKGREEN + "Digitos OK")
+            if any(chr.isalpha() for chr in password):
+                print(bcolors.OKGREEN + "Alfanumerico OK")
+                if any(chr.isalnum() != True for chr in password):
+                    print(bcolors.OKGREEN + "Caracter Especial OK")
+                    if any(bool(re.search(r"\s", ele)) for ele in enlista) == False:
+                        print(bcolors.OKGREEN + "Sin espacios OK")
+                        if any(chr.islower() for chr in password):
+                            print(bcolors.OKGREEN + "Minuscula OK")
+                            if any(chr.isupper() for chr in password):
+                                print(bcolors.OKGREEN + "Mayusculas OK")
+                                print(bcolors.OKCYAN + "CONTRASEÑA VALIDA" + bcolors.ENDC)
+                                return True
+
+    print(bcolors.WARNING + "Contraseña no válida" + bcolors.ENDC)
+    return False
+
+
 usuario = input(bcolors.HEADER + "Ingrese nombre de usuario\n" + bcolors.ENDC)
+clave = input(bcolors.HEADER + "Ingrese contraseña\n" + bcolors.ENDC)
 
 print(valida_usuario(usuario))
+print(valida_pass(clave))
