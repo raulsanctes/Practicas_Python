@@ -38,4 +38,4 @@ def valida_pass(password):
 clave = input(bcolors.HEADER + "Ingrese una contraseña\n" + bcolors.ENDC)
 
 print(valida_pass(clave))
-# FIN
+# Probando si funciona el git en vscode
