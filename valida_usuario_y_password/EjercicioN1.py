@@ -1,5 +1,3 @@
-import re
-
 def nickname(nombre_usuario):
 
         long=len(nombre_usuario) 
