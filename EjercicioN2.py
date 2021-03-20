@@ -1,40 +1,44 @@
-import re
+def clave(password):
 
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+        validar=False #que se vayan cumpliendo los requisitos uno a uno.
+        long=len(password) #Calcula la longitud de la contraseña
+        espacio=False  #variable para identificar espacios
+        mayuscula=False #variable para identificar letras mayúsculas
+        minuscula=False #variable para contar identificar letras minúsculas
+        numeros=False #variable para identificar números
+        y=password.isalnum()#si es alfanumérica retona True
+        correcto=True #verifica que hayan mayuscula, minuscula, numeros y no alfanuméricos
+        
+        for carac in password: #ciclo for que recorre caracter por caracter en la contraseña
 
+            if carac.isspace()==True: #Saber si el caracter es un espacio
+                espacio=True #si encuentra un espacio se cambia el valor user
 
-def valida_pass(password):
-    enlista = list(password)
-    if len(enlista) > 8:
-        print(bcolors.OKGREEN + "Longitud OK")
-        if any(chr.isdigit() for chr in password):
-            print(bcolors.OKGREEN + "Digitos OK")
-            if any(chr.isalpha() for chr in password):
-                print(bcolors.OKGREEN + "Alfanumerico OK")
-                if any(chr.isalnum() != True for chr in password):
-                    print(bcolors.OKGREEN + "Caracter Especial OK")
-                    if any(bool(re.search(r"\s", ele)) for ele in enlista) == False:
-                        print(bcolors.OKGREEN + "Sin espacios OK")
-                        if any(chr.islower() for chr in password):
-                            print(bcolors.OKGREEN + "Minuscula OK")
-                            if any(chr.isupper() for chr in password):
-                                print(bcolors.OKGREEN + "Mayusculas OK")
-                                print(bcolors.OKCYAN + "CONTRASEÑA VALIDA" + bcolors.ENDC)
-                                return True
+            if carac.isupper()== True: #saber si hay mayuscula
+                mayuscula=True #acumulador o contador de mayusculas
+                
+            if carac.islower()== True: #saber si hay minúsculas
+                minuscula=True #acumulador o contador de minúsculas
+                
+            if carac.isdigit()== True: #saber si hay números
+                numeros=True #acumulador o contador de numeros
+                            
+        if espacio==True: #hay espacios en blanco
+                print("La contraseña no puede contener espacios")
+        else:
+            validar=True #se cumple el primer requisito que no hayan espacios
+                       
+        if long <8 and validar==True:
+            print("Mínimo 8 caracteres")
+            validar=False #cambia a Flase si no se cumple el requisito móinimo de caracteres
 
-    print(bcolors.WARNING + "Contraseña no válida" + bcolors.ENDC)
-    return False
+        if mayuscula == True and minuscula ==True and numeros == True and y== False and validar ==True:
+           validar = True #Cumple el requisito de tener mayuscula, minuscula, numeros y no alfanuméricos
+        else:
+           correcto=False #uno o mas requisitos de mayuscula, minuscula, numeros y no alfanuméricos no se cumple
+           
+        if validar == True and correcto==False:
+           print("La contraseña elegida no es segura: debe contener letras minúsculas, mayúsculas, números y al menos 1 carácter no alfanumérico")
 
-
-clave = input(bcolors.HEADER + "Ingrese una contraseña\n" + bcolors.ENDC)
-
-print(valida_pass(clave))
+        if validar == True and correcto ==True:
+           return True

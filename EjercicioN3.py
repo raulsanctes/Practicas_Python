@@ -1,65 +1,15 @@
-import re
+import EjercicioN1
+import EjercicioN2
 
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+correcto=False
+while correcto==False:
+        nombre=input("Ingrese nombre de usuario: ")
+        if EjercicioN1.nickname(nombre) == True:
+            print("Usuario creado exitosamente")
+            correcto=True
 
-
-def valida_usuario(usuario):
-    enlista = list(usuario)
-    if len(enlista) > 6 and len(enlista) < 12 :
-        print(bcolors.OKGREEN + "Longitud OK")
-        if any(chr.isdigit() for chr in usuario):
-            print(bcolors.OKGREEN + "Digitos OK")
-            if any(chr.isalpha() for chr in usuario):
-                print(bcolors.OKGREEN + "Alfanumerico OK")
-                if any(chr.isalnum() != True for chr in usuario):
-                    print(bcolors.OKGREEN + "Caracter Especial OK")
-                    if any(bool(re.search(r"\s", ele)) for ele in enlista) == False:
-                        print(bcolors.OKGREEN + "Sin espacios OK")
-                        if any(chr.islower() for chr in usuario):
-                            print(bcolors.OKGREEN + "Minuscula OK")
-                            if any(chr.isupper() for chr in usuario):
-                                print(bcolors.OKGREEN + "Mayusculas OK")
-                                print(bcolors.OKCYAN + "USUARIO VALIDO" + bcolors.ENDC)
-                                return True
-
-    print(bcolors.WARNING + "Usuario no válido" + bcolors.ENDC)
-    return False
-
-
-def valida_pass(password):
-    enlista = list(password)
-    if len(enlista) > 8:
-        print(bcolors.OKGREEN + "Longitud OK")
-        if any(chr.isdigit() for chr in password):
-            print(bcolors.OKGREEN + "Digitos OK")
-            if any(chr.isalpha() for chr in password):
-                print(bcolors.OKGREEN + "Alfanumerico OK")
-                if any(chr.isalnum() != True for chr in password):
-                    print(bcolors.OKGREEN + "Caracter Especial OK")
-                    if any(bool(re.search(r"\s", ele)) for ele in enlista) == False:
-                        print(bcolors.OKGREEN + "Sin espacios OK")
-                        if any(chr.islower() for chr in password):
-                            print(bcolors.OKGREEN + "Minuscula OK")
-                            if any(chr.isupper() for chr in password):
-                                print(bcolors.OKGREEN + "Mayusculas OK")
-                                print(bcolors.OKCYAN + "CONTRASEÑA VALIDA" + bcolors.ENDC)
-                                return True
-
-    print(bcolors.WARNING + "Contraseña no válida" + bcolors.ENDC)
-    return False
-
-
-usuario = input(bcolors.HEADER + "Ingrese nombre de usuario\n" + bcolors.ENDC)
-clave = input(bcolors.HEADER + "Ingrese contraseña\n" + bcolors.ENDC)
-
-print(valida_usuario(usuario))
-print(valida_pass(clave))
+while correcto==True:
+    contrasenia=input("Ingrese su Password: ")
+    if EjercicioN2.clave(contrasenia)==True:
+        print("Contraseña creada exitosamente")
+        correcto=False

@@ -1,39 +1,18 @@
 import re
 
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+def nickname(nombre_usuario):
 
-
-def valida_usuario(usuario):
-    enlista = list(usuario)
-    if len(enlista) > 6 and len(enlista) < 12 :
-        print(bcolors.OKGREEN + "Longitud OK")
-        if any(chr.isdigit() for chr in usuario):
-            print(bcolors.OKGREEN + "Digitos OK")
-            if any(chr.isalpha() for chr in usuario):
-                print(bcolors.OKGREEN + "Alfanumerico OK")
-                if any(chr.isalnum() != True for chr in usuario):
-                    print(bcolors.OKGREEN + "Caracter Especial OK")
-                    if any(bool(re.search(r"\s", ele)) for ele in enlista) == False:
-                        print(bcolors.OKGREEN + "Sin espacios OK")
-                        if any(chr.islower() for chr in usuario):
-                            print(bcolors.OKGREEN + "Minuscula OK")
-                            if any(chr.isupper() for chr in usuario):
-                                print(bcolors.OKGREEN + "Mayusculas OK")
-                                print(bcolors.OKCYAN + "USUARIO VALIDO" + bcolors.ENDC)
-                                return True
-
-    print(bcolors.WARNING + "Usuario no válido" + bcolors.ENDC)
-    return False
-
-usuario = input(bcolors.HEADER + "Ingrese nombre de usuario\n" + bcolors.ENDC)
-
-print(valida_usuario(usuario))
+        long=len(nombre_usuario) 
+        y=nombre_usuario.isalnum()
+        
+        if y== False:
+            print("El nombre de usuario puede contener solo letras y números")
+            
+        if long < 6: 
+            print("El nombre de usuario debe contener al menos 6 caracteres")
+            
+        if long > 12: 
+            print("El nombre de usuario no puede contener más de 12 caracteres")
+            
+        if long >5 and long <13 and y ==True:
+            return True 
